@@ -1,11 +1,10 @@
 # Light Protocol Examples
 
-Code examples for building with [Light Token](https://www.zkcompression.com/light-token/welcome) and [ZK Compression](https://www.zkcompression.com/learn/overview) on Solana.
+Code examples for building with Light Token and the core primtive ZK Compression on Solana.
+- ZK Compression is a Solana framework that reduces the cost of token accounts and PDAs by 99%. 
+- For tokens, the Light Token SDK keeps code changes minimal and is a superset of the SPL-token API, i.e. supports every `spl-token` instructions and additional instructions for interoperability.
 
-Light Token is a high-performance token standard that is functionally equivalent to SPL, but stores mint and token accounts more efficiently. The light token program sponsors the rent-exemption cost for you. Light-token accounts can hold balances from any light, SPL, or Token-2022 mint.
-
-ZK Compression is a Solana account primitive that lets you create tokens and PDAs without rent-exemption cost with L1 performance and security. Account data lives on the Solana ledger with only a cryptographic fingerprint stored on-chain. The protocol uses 128-byte zero-knowledge proofs to verify the integrity of the compressed accounts.
-
+**Cost Comparison** 
 | Account Type | Light | Standard Solana |
 |---|---|---|
 | Mint account | ~0.000091 SOL | ~0.0015 SOL |
@@ -14,27 +13,27 @@ ZK Compression is a Solana account primitive that lets you create tokens and PDA
 
 Learn more: [Overview](https://www.zkcompression.com/learn/overview) | [FAQ](https://www.zkcompression.com/faq)
 
-Install agent skills:
+Install [agent skills](https://github.com/Lightprotocol/skills):
 ```bash
 npx skills add Lightprotocol/skills
 ```
 
 ## Contents
 
-- [Light Token](#light-token)
+- [Token Examples](#light-token)
   - [Toolkits](#toolkits)
-  - [Client Examples - TypeScript](#client-examples---typescript)
-  - [Client Examples - Rust](#client-examples---rust)
+  - [TypeScript Client](#typescript-client)
+  - [Client Examples - Rust](#rust-client)
   - [Program Examples](#program-examples)
   - [Anchor Macros](#anchor-macros)
-  - [Instructions](#instructions)
-- [ZK Compression Core](#zk-compression-core)
+  - [Basic Instructions](#instructions)
   - [Token Distribution](#token-distribution)
-  - [Basic Operation Programs](#basic-operation-programs)
-  - [Nullifier Program](#nullifier-program)
+- [PDA Accounts](#zk-compression-core)
+  - [Basic Instruction Programs](#basic-operation-programs)
+  - [Nullifier Program](#nullifier-program), e.g. for payments
   - [Counter Program](#counter-program)
-  - [More Programs](#more-programs)
-  - [ZK Programs](#zk-programs)
+  - [Read-only Program](#read-only)
+  - [ZK Programs](#zk-programs): id and nullifiers
 - [Documentation & AI](#documentation--ai)
 
 ## Light Token
@@ -50,7 +49,7 @@ npx skills add Lightprotocol/skills
 | [Gasless Transactions](https://github.com/Lightprotocol/examples-light-token/tree/main/toolkits/gasless-transactions/) | Abstract SOL fees so users never hold SOL. Set your application as the fee payer. Sponsor rent top-ups and transaction fees. |
 | [Token 2022 Extensions](https://github.com/Lightprotocol/examples-light-token/tree/main/extensions/) | Create mints with Token 2022 extensions and register them for Light Token |
 
-### Client Examples - TypeScript
+### TypeScript Client
 
 |  |  |  | Description |
 |---------|--------|-------------|-------------|
@@ -69,7 +68,7 @@ npx skills add Lightprotocol/skills
 | revoke | [Action](https://github.com/Lightprotocol/examples-light-token/tree/main/typescript-client/actions/delegate-revoke.ts) | | Revoke delegate |
 | delegate-transfer | [Action](https://github.com/Lightprotocol/examples-light-token/tree/main/typescript-client/actions/delegate-transfer.ts) | | Delegate transfers tokens on behalf of owner |
 
-### Client Examples - Rust
+### Rust Client
 
 |  |  |  | Description |
 |---------|--------|-------------|-------------|
@@ -111,7 +110,7 @@ npx skills add Lightprotocol/skills
 | [create-mint](https://github.com/Lightprotocol/examples-light-token/tree/main/programs/anchor/basic-macros/create-mint) | Create light-token mint |
 | [create-token-account](https://github.com/Lightprotocol/examples-light-token/tree/main/programs/anchor/basic-macros/create-token-account) | Create light-token account |
 
-### Instructions
+### Basic Instructions
 
 The instructions use pure CPI calls which you can combine with existing and / or light macros. For existing programs, you can replace spl_token with light_token instructions as you need. The API is a superset of SPL-token so switching is straightforward.
 
@@ -130,8 +129,6 @@ The instructions use pure CPI calls which you can combine with existing and / or
 | [transfer-checked](https://github.com/Lightprotocol/examples-light-token/tree/main/programs/anchor/basic-instructions/transfer-checked/src/lib.rs) | Transfer with mint validation via CPI |
 | [transfer-interface](https://github.com/Lightprotocol/examples-light-token/tree/main/programs/anchor/basic-instructions/transfer-interface/src/lib.rs) | Transfer between light-token, T22, and SPL accounts via CPI |
 
-## ZK Compression Core
-
 ### Token Distribution
 
 |  | Description |
@@ -139,6 +136,8 @@ The instructions use pure CPI calls which you can combine with existing and / or
 | [simple-claim](https://github.com/Lightprotocol/program-examples/tree/main/airdrop-implementations/simple-claim) | Distributes compressed tokens that get decompressed to SPL on claim with cliff |
 | [merkle-distributor](https://github.com/Lightprotocol/distributor) | Distributes SPL tokens, uses compressed PDAs to track claims with linear vesting, partial claims and clawback. Based on Jito Merkle distributor and optimized with rent-free PDAs. |
 | [token-distribution](https://github.com/Lightprotocol/example-token-distribution) | Client reference implementations for common token distribution flows with ZK Compression (airdrops and rewards) |
+
+## PDA Accounts
 
 ### Basic Operation Programs
 
@@ -170,10 +169,14 @@ Full compressed account lifecycle (create, increment, decrement, reset, close):
 - [counter/native](https://github.com/Lightprotocol/program-examples/tree/main/counter/native/) - Native Solana program with light-sdk and Rust tests.
 - [counter/pinocchio](https://github.com/Lightprotocol/program-examples/tree/main/counter/pinocchio/) - Pinocchio program with light-sdk-pinocchio and Rust tests.
 
-### More Programs
+### Read-only
 
-- [create-and-update](https://github.com/Lightprotocol/program-examples/tree/main/create-and-update/) - Create a new compressed account and update an existing compressed account with a single validity proof in one instruction.
 - [read-only](https://github.com/Lightprotocol/program-examples/tree/main/read-only) - Create a new compressed account and read it onchain.
+
+### Create and Update
+- [create-and-update](https://github.com/Lightprotocol/program-examples/tree/main/create-and-update/) - Create a new compressed account and update an existing compressed account with a single validity proof in one instruction.
+
+### Compare Solana vs Compressed Account
 - [account-comparison](https://github.com/Lightprotocol/program-examples/tree/main/account-comparison/) - Compare compressed vs regular Solana accounts.
 
 ### ZK Programs
