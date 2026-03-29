@@ -1,6 +1,6 @@
 # Light Protocol Examples
 
-Code examples for building with Light Token and the core primtive ZK Compression on Solana.
+Overview to code examples for building with Light Token and the core primtive ZK Compression on Solana.
 - ZK Compression is a Solana framework that reduces the cost of token accounts and PDAs by 99%. 
 - For tokens, the Light Token SDK keeps code changes minimal and is a superset of the SPL-token API, i.e. supports every `spl-token` instructions and additional instructions for interoperability.
 
