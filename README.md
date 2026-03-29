@@ -21,47 +21,21 @@ npx skills add Lightprotocol/skills
 ## Contents
 
 - [Token Examples](#light-token)
-  - [Toolkits](#toolkits)
-    - [Payments](#toolkits)
-    - [Streaming Tokens](#toolkits)
-    - [Sign with Privy](#toolkits)
-    - [Sign with Wallet Adapter](#toolkits)
-    - [Gasless Transactions](#toolkits)
-    - [Token 2022 Extensions](#toolkits)
+  - [Toolkits](#toolkits): Payments, Streaming Tokens, Sign with Privy, Sign with Wallet Adapter, Gasless Transactions, Token 2022 Extensions
   - [TypeScript Client](#typescript-client)
   - [Rust Client](#rust-client)
-  - [Program Examples](#program-examples)
-    - [escrow](#program-examples)
-    - [fundraiser](#program-examples)
-    - [light-token-minter](#program-examples)
-    - [token-swap](#program-examples)
-    - [cp-swap-reference](#program-examples)
-    - [pinocchio-swap](#program-examples)
-    - [create-and-transfer](#program-examples)
+  - [Program Examples](#program-examples): escrow, fundraiser, light-token-minter, token-swap, cp-swap-reference, pinocchio-swap, create-and-transfer
   - [Anchor Macros](#anchor-macros)
   - [Basic Instructions](#basic-instructions)
-  - [Token Distribution](#token-distribution)
-    - [simple-claim](#token-distribution)
-    - [merkle-distributor](#token-distribution)
-    - [token-distribution](#token-distribution)
+  - [Token Distribution](#token-distribution): simple-claim, merkle-distributor, token-distribution
 - [PDA Accounts](#pda-accounts)
-  - [Basic Operation Programs](#basic-operation-programs)
-    - [create](#basic-operation-programs)
-    - [update](#basic-operation-programs)
-    - [close](#basic-operation-programs)
-    - [reinit](#basic-operation-programs)
-    - [burn](#basic-operation-programs)
+  - [Basic Operation Programs](#basic-operation-programs): create, update, close, reinit, burn
   - [Nullifier Program](#nullifier-program), e.g. for payments
-  - [Counter Program](#counter-program)
-    - [anchor](#counter-program)
-    - [native](#counter-program)
-    - [pinocchio](#counter-program)
+  - [Counter Program](#counter-program): anchor, native, pinocchio
   - [Read-only](#read-only)
   - [Create and Update](#create-and-update)
   - [Compare Solana vs Compressed Account](#compare-solana-vs-compressed-account)
-  - [ZK Programs](#zk-programs)
-    - [zk-id](#zk-programs)
-    - [nullifier](#zk-programs)
+  - [ZK Programs](#zk-programs): zk-id and nullifier for zk programs
 - [Documentation & AI](#documentation--ai)
 
 ## Light Token
